@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.dev2prod.ticket.profil.entity.ProfilEntity;
 import com.dev2prod.ticket.profil.service.ProfilService;
+import com.dev2prod.ticket.user.entity.UserEntity;
+
 import java.util.List;
 
 
@@ -52,6 +54,14 @@ public class ProfilController {
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @PutMapping("/{profilId}/workflow/{workflowId}")
+    public ProfilEntity assignWorkflowToProfil(
+            @PathVariable Long profilId,
+            @PathVariable Long workflowId
+    ){
+        return profilService.assignWorkflowToProfil(profilId, workflowId);
     }
     // Si nécessaire, ajoutez d'autres méthodes pour gérer des cas d'utilisation spécifiques
 }
