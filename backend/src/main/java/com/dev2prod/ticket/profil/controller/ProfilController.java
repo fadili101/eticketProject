@@ -5,13 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.dev2prod.ticket.caisse.entity.CaisseEntity;
 import com.dev2prod.ticket.profil.entity.ProfilEntity;
 import com.dev2prod.ticket.profil.service.ProfilService;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/profil")
+@CrossOrigin
 public class ProfilController {
 
     @Autowired

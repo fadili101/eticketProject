@@ -1,6 +1,6 @@
 package com.dev2prod.ticket.user.controller;
 
-import com.dev2prod.ticket.departement.entity.DepartementEntity;
+
 import com.dev2prod.ticket.user.entity.UserEntity;
 import com.dev2prod.ticket.user.service.UserService;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
