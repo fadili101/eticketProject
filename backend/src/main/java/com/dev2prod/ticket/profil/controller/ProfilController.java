@@ -4,12 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import com.dev2prod.ticket.profil.entity.ProfilEntity;
 import com.dev2prod.ticket.profil.service.ProfilService;
+import com.dev2prod.ticket.user.entity.UserEntity;
+
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/profil")
+@CrossOrigin
 public class ProfilController {
 
     @Autowired
@@ -42,5 +47,21 @@ public class ProfilController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/update/{profilId}")
+    public ResponseEntity updateProfil(@PathVariable Long profilId, @RequestBody ProfilEntity profilObj) {
+        if (profilService.updateProfil(profilId, profilObj)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @PutMapping("/{profilId}/workflow/{workflowId}")
+    public ProfilEntity assignWorkflowToProfil(
+            @PathVariable Long profilId,
+            @PathVariable Long workflowId
+    ){
+        return profilService.assignWorkflowToProfil(profilId, workflowId);
+    }
     // Si nécessaire, ajoutez d'autres méthodes pour gérer des cas d'utilisation spécifiques
 }

@@ -2,6 +2,7 @@ package com.dev2prod.ticket.user.service;
 
 import com.dev2prod.ticket.caisse.entity.CaisseEntity;
 import com.dev2prod.ticket.caisse.repository.CaisseRepository;
+import com.dev2prod.ticket.departement.entity.DepartementEntity;
 import com.dev2prod.ticket.user.entity.UserEntity;
 import com.dev2prod.ticket.user.repository.UserRepository;
 
@@ -47,5 +48,15 @@ public class UserService {
         caisseSet.add(caisse);
         user.setAssignedCaisses(caisseSet);
         return userRepository.save(user);
+    }
+    
+    public boolean updateUser(Long userId, UserEntity depObj) {
+        if (userRepository.existsById(userId)) {
+            depObj.setUserId(userId); // Assurez-vous que l'ID est bien défini avant de sauvegarder
+            userRepository.save(depObj);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
