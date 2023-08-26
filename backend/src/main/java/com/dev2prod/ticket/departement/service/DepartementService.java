@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dev2prod.ticket.departement.entity.DepartementEntity;
 import com.dev2prod.ticket.departement.repository.DepartementRepository;
+import com.dev2prod.ticket.profil.entity.ProfilEntity;
 
 @Service
 public class DepartementService {
@@ -28,6 +29,16 @@ public class DepartementService {
 
     public void deleteDepartement(Long id) {
         departementRepository.deleteById(id);
+    }
+    
+    public boolean updateDepartement(Long depId, DepartementEntity depObj) {
+        if (departementRepository.existsById(depId)) {
+            depObj.setDepartementId(depId); // Assurez-vous que l'ID est bien défini avant de sauvegarder
+            departementRepository.save(depObj);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Ajoutez d'autres méthodes de service si nécessaire.

@@ -11,12 +11,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.dev2prod.ticket.caisse.entity.CaisseEntity;
 import com.dev2prod.ticket.user.entity.UserEntity;
+import com.dev2prod.ticket.workflow.entity.WorkflowEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -36,5 +41,12 @@ public class ProfilEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "profil") // le nom du champ dans l'entité User
     private Set<UserEntity> users = new HashSet<>();
+    
+    @ManyToMany
+    @JoinTable(name = "profil_workflow",
+            joinColumns = @JoinColumn(name = "profil_id"),
+            inverseJoinColumns = @JoinColumn(name = "workflow_id")
+    )
+    private Set<WorkflowEntity> assignedWorkflows = new HashSet<>();
 
 }
