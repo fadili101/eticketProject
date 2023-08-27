@@ -1,33 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContainersComponent } from './containers/containers.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    redirectTo: '',
+    pathMatch: 'full',
   },
   {
-    path: 'dashboard',
+    path: '',
     component: ContainersComponent,
-    data: {
-      title: 'Home'
-    },
-    children: [
-      {
-        path: '',
-        redirectTo: 'user',
-        pathMatch: 'full'
-      },
-      {
-        path: 'user',
-        loadChildren: () =>
-          import('./views/user/user.module').then((m) => m.UserModule)
-      },
-    ]
-  }
+    children: [{
+      path: 'user',
+      loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
+    }]
+  },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

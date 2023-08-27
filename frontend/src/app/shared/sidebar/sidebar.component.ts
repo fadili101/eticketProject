@@ -6,7 +6,7 @@ export const ROUTES = [
     title: 'Utilisateurs',
     icon: 'fas fa-user me-2',
     children: [
-      { path: 'get', title: 'All Users' }, // This corresponds to /dashboard/user/get
+      { path: 'list', title: 'All Users' }, // This corresponds to /dashboard/user/get
       { path: 'add', title: 'Create User' }, // This corresponds to /dashboard/user/add
     ]
   }
