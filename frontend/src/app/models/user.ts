@@ -8,7 +8,7 @@ export interface User {
     actif: boolean;
     login: string;
     motPasse: string;
-    cO_NO: string;
+    co_NO: string;
     nomUser: string;
     toutDocument: boolean;
     updatePassword: boolean;

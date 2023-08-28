@@ -1,13 +1,12 @@
-import { DecimalPipe, NgFor } from '@angular/common';
-import { Component, PipeTransform, QueryList, ViewChildren } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
-import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, startWith, map } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Observable, map, of } from 'rxjs';
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
 import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
 import { usersService } from './users.service';
-
+import { ModalComponent } from '../modal/modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddComponent } from '../add/add.component';
 @Component({
   selector: 'users-list',
   templateUrl: './UsersList.component.html',
@@ -23,12 +22,13 @@ export class UsersListComponent {
 	@ViewChildren(NgbdSortableHeader)
   	headers!: QueryList<NgbdSortableHeader>;
 
-	  constructor(public service: usersService) {
+	constructor(
+		public service: usersService,
+		public dialog: MatDialog,
+	) {
 	}
 	ngOnInit(): void{
-		this.users$ = this.service.users$;
-		this.total$ = this.service.total$;
-		this.hasData$ = this.users$.pipe(map(users => users.length > 0));
+		this.getData();
 
 		// check is data being emitting
 		// this.users$.subscribe(users => console.log('Fetched users:', users));
@@ -41,5 +41,22 @@ export class UsersListComponent {
 		});
 		this.service.sortColumn = column;
 		this.service.sortDirection = direction;
+	}
+	openDialog(user:User): void {
+		let dialogRef = this.dialog.open(ModalComponent, {
+			data: user,
+			width: '80%',
+			height: '80%',
+			autoFocus: false
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			this.service.refreshData();
+			this.getData();
+		});
+	}
+	getData() {
+		this.users$ = this.service.users$;
+		this.total$ = this.service.total$;
+		this.hasData$ = this.users$.pipe(map(users => users.length > 0));
 	}
 }

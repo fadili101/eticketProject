@@ -64,7 +64,6 @@ export class usersService {
 		private pipe: DecimalPipe,
 		private userService: UserService
 	) {
-		console.log('test')
 		this.userService.getUsers().subscribe(
 			data => {
 				this.USERS = data;
@@ -84,7 +83,14 @@ export class usersService {
 			});
 		this._search$.next();
 	}
-
+	refreshData() {
+        this.userService.getUsers().subscribe(
+            data => {
+                this.USERS = data;
+                this._search$.next(); // Trigger a new search to update observables
+            }
+        );
+    }
 	get users$() {
 		return this._users$.asObservable();
 	}

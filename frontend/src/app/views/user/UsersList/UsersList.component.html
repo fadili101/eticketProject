@@ -24,6 +24,7 @@
 				<th scope="col" sortable="login" (sort)="onSort($event)">Login</th>
 				<th scope="col" sortable="profil" (sort)="onSort($event)">Profile</th>
 				<th scope="col">Actif</th>
+				<th scope="col">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,9 +39,11 @@
 				<td>
 					<i class="fas fa-circle me-2" *ngIf="user.actif" style="color: green;"></i>
 					<i class="fas fa-circle" *ngIf="!user.actif" style="color: red;"></i>
-					<!-- <button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(user)">
-						<i class="material-icons">edit</i>
-					</button> -->
+				</td>
+				<td>
+				<button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(user)">
+					<i class="material-icons">edit</i>
+				</button>
 				</td>
 			</tr>
 		</tbody>

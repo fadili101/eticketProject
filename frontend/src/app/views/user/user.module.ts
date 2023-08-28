@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AsyncPipe, CommonModule, DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { AddComponent } from './add/add.component';
 import { UsersListComponent } from './UsersList/UsersList.component';
@@ -46,6 +46,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSnackBarModule,
     ReactiveFormsModule
   ],
-  exports: [UserRoutingModule]
+  exports: [UserRoutingModule],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class UserModule { }

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,12 +19,14 @@ import { ModalComponent } from '../modal/modal.component';
 	styleUrls: ['./add.component.css']
 })
 export class AddComponent{
+	@Input() userData!: User;
 	users: User[] = [];
 	user!: User;
 	profiles: Profil[] = [];
 	departements: Departement[] = [];
 	Caisses: Caisse[] = [];
 	userForm: FormGroup;
+	action: String = "Ajouter";
 
 	constructor(private userService: UserService,
 		private caisseService: caisseService,
@@ -35,20 +37,39 @@ export class AddComponent{
 		private formBuilder: FormBuilder,
 	) {
 		this.userForm = this.formBuilder.group({
-			prenom: '',
-			nom: '',
+			userId: null,
+			prenomUser: '',
+			actif: false,
 			login: '',
-			password: '',
-			Co_NO: '',
-			DocPermissions: '',
-			editPass: '',
-			actif: '',
-			prls: '',
-			dprts: '',
-			cai: [],
+			motPasse: '',
+			cO_NO: '',
+			nomUser: '',
+			toutDocument: false,
+			updatePassword : false,
+			assignedCaisses: [],
+			profil: null,
+			departement: null,
 		  });
 	}
 	ngOnInit(){
+		if (this.userData)
+		{
+			this.userForm.patchValue({
+				userId: this.userData.userId,
+				prenomUser: this.userData.prenomUser,
+				nomUser: this.userData.nomUser,
+				login: this.userData.login,
+				motPasse: this.userData.motPasse,
+				cO_NO: this.userData.co_NO,
+				toutDocument: this.userData.toutDocument,
+				updatePassword: this.userData.updatePassword,
+				assignedCaisses: this.userData.assignedCaisses.map((caisse: any) => caisse.caisseId),
+				profil: this.userData.profil?.profilId, // Set the profilId value
+				departement: this.userData.departement?.departementId, // Set the departementId value if it exists
+				actif: this.userData.actif
+			})
+			this.action = "Modifier"
+		}
 		this.userService.getUsers().subscribe(
 			data => {
 				this.users = data;
@@ -69,54 +90,45 @@ export class AddComponent{
 				this.departements = data;
 			}
 		)
-	}
-	onSubmit()
-	{
-		// this.userService.getUser(this.id).subscribe(
-		// 	data => {
-		// 		this.user = data;
-		// 	}
-		// )
+
 	}
 	onAdd(formValue: any) {
-		const transformedData = this.transformFormData(formValue);
-		console.log(transformedData)
-		this.userService.addUser(transformedData).subscribe(
-			data => {
-				this.openSnackBar("Created Successfully", "cancel")
-			}
-		)
+		if (!formValue.userId)
+		{
+			const transformedData = this.transformFormData(formValue);
+			this.userService.addUser(transformedData).subscribe(
+				data => {
+					this.openSnackBar("Created Successfully", "cancel")
+				}
+			)
+		}else{
+			const transformedData = this.transformFormData(formValue);
+			this.userService.updateUser(transformedData).subscribe(
+				data => {
+					this.openSnackBar("Updated Successfully", "cancel")
+				}
+			)
+
+		}
 	}
 	openSnackBar(message: string, action: string) {
 		this._snackBar.open(message, action);
 	  }
 	transformFormData(formData: any): any {
 		return {
-		  prenomUser: formData.prenom,
-		  nomUser: formData.nom,
+			userId: formData.userId,
+		  prenomUser: formData.prenomUser,
+		  nomUser: formData.nomUser,
 		  login: formData.login,
-		  motPasse: formData.password,
-		  co_NO: formData.Co_NO,
-		  toutDocument: formData.DocPermissions === 'oui' ? false : true,
-		  updatePassword: formData.editPass === 'oui' ? true : false,
-		  profil: { profilId: formData.prls },
-		  departement: { departementId: formData.dprts },
-		  assignedCaisses: formData.cai.map((caisseId: number) => ({ caisseId })),
-		  actif: formData.actif === 'oui' ? true : false // Transform actif
+		  motPasse: formData.motPasse,
+		  cO_NO: formData.cO_NO,
+		  toutDocument: formData.toutDocument,
+		  updatePassword: formData.updatePassword,
+		  profil: { profilId: formData.profil },
+		  departement: { departementId: formData.departement },
+		  assignedCaisses: formData.assignedCaisses.map((caisseId: number) => ({ caisseId, isActive: true })),
+		  actif: formData.actif
 		};
 	}
 
-	openDialog(user:User): void {
-		let dialogRef = this.dialog.open(ModalComponent, {
-			data: user,
-			width: '80%',
-			height: '80%',
-			autoFocus: false
-		});
-		dialogRef.afterClosed().subscribe(result => {
-			console.log('Dialog closed:', result);
-		});
-	}
 }
-
-
