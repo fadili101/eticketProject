@@ -7,39 +7,30 @@ import org.springframework.stereotype.Service;
 
 import com.dev2prod.ticket.departement.entity.DepartementEntity;
 import com.dev2prod.ticket.departement.repository.DepartementRepository;
-import com.dev2prod.ticket.profil.entity.ProfilEntity;
+
 
 @Service
 public class DepartementService {
-
     @Autowired
-    private DepartementRepository departementRepository;
+    private DepartementRepository repository;
 
-    public List<DepartementEntity> getAllDepartements() {
-        return departementRepository.findAll();
+    public List<DepartementEntity> getAll() {
+        return repository.findAll();
     }
 
-    public DepartementEntity getDepartementById(Long id) {
-        return departementRepository.findById(id).orElse(null);
+    public DepartementEntity getById(Integer id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public DepartementEntity saveDepartement(DepartementEntity departement) {
-        return departementRepository.save(departement);
+    public List<DepartementEntity> getByDepartement(String departement) {
+        return repository.findByDepartement(departement);
     }
 
-    public void deleteDepartement(Long id) {
-        departementRepository.deleteById(id);
-    }
-    
-    public boolean updateDepartement(Long depId, DepartementEntity depObj) {
-        if (departementRepository.existsById(depId)) {
-            depObj.setDepartementId(depId); // Assurez-vous que l'ID est bien défini avant de sauvegarder
-            departementRepository.save(depObj);
-            return true;
-        } else {
-            return false;
-        }
+    public DepartementEntity save(DepartementEntity entity) {
+        return repository.save(entity);
     }
 
-    // Ajoutez d'autres méthodes de service si nécessaire.
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
 }

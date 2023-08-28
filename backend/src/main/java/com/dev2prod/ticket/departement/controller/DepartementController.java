@@ -3,8 +3,6 @@ package com.dev2prod.ticket.departement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,41 +19,43 @@ import com.dev2prod.ticket.departement.service.DepartementService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/departements")
+@RequestMapping("/departement")
 public class DepartementController {
-
     @Autowired
-    private DepartementService departementService;
+    private DepartementService service;
 
-    @GetMapping("/getdepartements")
-    public List<DepartementEntity> getAllDepartements() {
-        return departementService.getAllDepartements();
+    @GetMapping
+    public List<DepartementEntity> getAll() {
+        return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public DepartementEntity getDepartementById(@PathVariable Long id) {
-        return departementService.getDepartementById(id);
+    public DepartementEntity getById(@PathVariable Integer id) {
+        return service.getById(id);
     }
 
-    @PostMapping("/save")
-    public DepartementEntity saveDepartement(@RequestBody DepartementEntity departement) {
-        return departementService.saveDepartement(departement);
+    @GetMapping("/byname/{departement}")
+    public List<DepartementEntity> getByDepartement(@PathVariable String departement) {
+        return service.getByDepartement(departement);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteDepartement(@PathVariable Long id) {
-        departementService.deleteDepartement(id);
-        return ResponseEntity.ok().build();
+    @PostMapping
+    public DepartementEntity create(@RequestBody DepartementEntity entity) {
+        return service.save(entity);
     }
-    
-    @PutMapping("/update/{depId}")
-    public ResponseEntity updateDepartement(@PathVariable Long depId, @RequestBody DepartementEntity depObj) {
-        if (departementService.updateDepartement(depId, depObj)) {
-            return new ResponseEntity(HttpStatus.OK);
-        } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+    @PutMapping("/{id}")
+    public DepartementEntity update(@PathVariable Integer id, @RequestBody DepartementEntity entity) {
+        DepartementEntity existing = service.getById(id);
+        if (existing != null) {
+            entity.setIdDepartement(id);
+            return service.save(entity);
         }
+        return null;
     }
 
-    // Ajoutez d'autres méthodes de contrôleur si nécessaire.
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        service.delete(id);
+    }
 }

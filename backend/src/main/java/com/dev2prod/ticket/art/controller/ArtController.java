@@ -7,27 +7,29 @@ import com.dev2prod.ticket.art.service.ArtService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
+@RequestMapping("/arts")
 public class ArtController {
     @Autowired
     private ArtService artService;
 
-    @GetMapping("/arts")
+    @GetMapping
     public List<ArtEntity> getAllArts() {
         return artService.getAllArts();
     }
 
-    @GetMapping("/arts/{id}")
+    @GetMapping("/{id}")
     public ArtEntity getArtById(@PathVariable Integer id) {
         return artService.getArtById(id);
     }
 
-    @GetMapping("/arts/cpt/{cpt}")
+    @GetMapping("/cpt/{cpt}")
     public List<ArtEntity> getArtByCpt(@PathVariable String cpt) {
         return artService.getArtByCpt(cpt);
     }
 
-    @PostMapping("/arts")
+    @PostMapping
     public ArtEntity createArt(@RequestBody ArtEntity art) {
         return artService.saveArt(art);
     }
@@ -37,7 +39,7 @@ public class ArtController {
         return artService.updateArt(id, art);
     }
 
-    @DeleteMapping("/arts/{id}")
+    @DeleteMapping("/{id}")
     public void deleteArt(@PathVariable Integer id) {
         artService.deleteArt(id);
     }

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.dev2prod.ticket.profil.entity.ProfilEntity;
-import com.dev2prod.ticket.user.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;

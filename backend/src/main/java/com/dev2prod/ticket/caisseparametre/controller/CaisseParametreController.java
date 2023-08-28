@@ -7,6 +7,7 @@ import com.dev2prod.ticket.caisseparametre.service.CaisseParametreService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/caisseparametre")
 public class CaisseParametreController {
