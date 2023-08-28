@@ -27,9 +27,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [
     CommonModule,
     UserRoutingModule,
+		FormsModule,
     NgFor,
 		DecimalPipe,
-		FormsModule,
 		AsyncPipe,
 		NgbTypeaheadModule,
 		NgbdSortableHeader,

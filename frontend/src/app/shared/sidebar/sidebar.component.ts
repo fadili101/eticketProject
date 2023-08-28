@@ -9,6 +9,23 @@ export const ROUTES = [
       { path: 'list', title: 'All Users' }, // This corresponds to /dashboard/user/get
       { path: 'add', title: 'Create User' }, // This corresponds to /dashboard/user/add
     ]
+  },
+  {
+    path: 'Departement',
+    title: 'Departement',
+    icon: 'fas fa-th-large me-2',
+    children: [
+      { path: 'list', title: 'Liste Des Departements'},
+      // { path: 'add', title: 'Create Departement'},
+    ]
+  },
+  {
+    path: 'Profile',
+    title: 'Profile',
+    icon: 'fas fa-th-large me-2',
+    children: [
+      { path: 'list', title: 'Liste Des Profiles'}
+    ]
   }
 ];
 

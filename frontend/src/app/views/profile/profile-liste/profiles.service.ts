@@ -2,14 +2,13 @@ import { DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, debounceTime, delay, of, switchMap, tap } from 'rxjs';
-import { SortColumn, SortDirection } from './sortable.directive';
-import { User } from 'src/app/models/user';
-import { Caisse } from 'src/app/models/caisse';
+import { SortColumn, SortDirection } from './ProfileSortable.directive';
 import { Departement } from 'src/app/models/departement';
+import { profileService } from 'src/app/services/profile.service';
+import { User } from 'src/app/models/user';
 import { Profil } from 'src/app/models/profil';
-import { UserService } from '../../../services/user.service'
 interface SearchResult {
-	users: User[];
+	profiles: Profil[];
 	total: number;
 }
 
@@ -21,24 +20,33 @@ interface State {
 	sortDirection: SortDirection;
 }
 
-const compare = (v1: string | number | boolean | Caisse[] | Profil | Departement, v2: string | number | boolean | Caisse[] | Profil | Departement) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0);
-
-function sort(users: User[], column: SortColumn, direction: string): User[] {
-	if (direction === '' || column === '') {
-		return users;
+const compare = (v1: string | number | Departement | Departement[] | User[] | null, v2: string | number | Departement | Departement[] | User[] | null) => {
+	if (v1 === null && v2 === null) {
+	  return 0;
+	} else if (v1 === null) {
+	  return -1;
+	} else if (v2 === null) {
+	  return 1;
 	} else {
-		return [...users].sort((a, b) => {
+	  return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+	}
+  };
+
+function sort(departements: Profil[], column: SortColumn, direction: string): Profil[] {
+	if (direction === '' || column === '') {
+		return departements;
+	} else {
+		return [...departements].sort((a, b) => {
 			const res = compare(a[column], b[column]);
 			return direction === 'asc' ? res : -res;
 		});
 	}
 }
 
-function matches(user: User, term: string) {
+function matches(profile: Profil, term: string) {
 	return (
-		user.nomUser.toLowerCase().includes(term.toLowerCase()) ||
-		String(user.prenomUser).toLowerCase().includes(term.toLowerCase()) ||
-		String(user.login).toLowerCase().includes(term.toLowerCase())
+		String(profile.nomProfil).toLowerCase().includes(term.toLowerCase()) ||
+		String(profile.description).toLowerCase().includes(term.toLowerCase())
 	);
 }
 
@@ -46,12 +54,12 @@ function matches(user: User, term: string) {
 @Injectable({
 	providedIn: 'root'
 })
-export class usersService {
+export class ProfilesService {
 	private _loading$ = new BehaviorSubject<boolean>(true);
 	private _search$ = new Subject<void>();
-	private _users$ = new BehaviorSubject<User[]>([]);
+	private _profiles$ = new BehaviorSubject<Profil[]>([]);
 	private _total$ = new BehaviorSubject<number>(0);
-	USERS: User[] = [];
+	PROFILES: Profil[] = [];
 	private _state: State = {
 		page: 1,
 		pageSize: 4,
@@ -62,11 +70,11 @@ export class usersService {
 
 	constructor(private http: HttpClient,
 		private pipe: DecimalPipe,
-		private userService: UserService
+		private ProfileSerice: profileService
 	) {
-		this.userService.getUsers().subscribe(
+		this.ProfileSerice.getProfiles().subscribe(
 			data => {
-				this.USERS = data;
+				this.PROFILES = data;
 			}
 		)
 		this._search$
@@ -78,21 +86,21 @@ export class usersService {
 				tap(() => this._loading$.next(false)),
 			)
 			.subscribe((result) => {
-				this._users$.next(result.users);
+				this._profiles$.next(result.profiles);
 				this._total$.next(result.total);
 			});
 		this._search$.next();
 	}
 	refreshData() {
-        this.userService.getUsers().subscribe(
+        this.ProfileSerice.getProfiles().subscribe(
             data => {
-                this.USERS = data;
+                this.PROFILES = data;
                 this._search$.next(); // Trigger a new search to update observables
             }
         );
     }
-	get users$() {
-		return this._users$.asObservable();
+	get profiles$() {
+		return this._profiles$.asObservable();
 	}
 	get total$() {
 		return this._total$.asObservable();
@@ -134,14 +142,14 @@ export class usersService {
 		const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
 		// 1. sort
-		let users = sort(this.USERS, sortColumn, sortDirection);
+		let departements = sort(this.PROFILES, sortColumn, sortDirection);
 
 		// 2. filter
-		users = users.filter((user) => matches(user, searchTerm));
-		const total = users.length;
+		departements = departements.filter((departement) => matches(departement, searchTerm));
+		const total = departements.length;
 
 		// 3. paginate
-		users = users.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-		return of({ users, total });
+		departements = departements.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+		return of({ departements, total });
 	}
 }
