@@ -48,7 +48,7 @@ public class UserController {
     ){
         return userService.assignCaisseToUser(userId, caisseId);
     }
-    
+
     @PutMapping("/update/{userId}")
     public ResponseEntity updateUser(@PathVariable Long userId, @RequestBody UserEntity userObj) {
         if (userService.updateUser(userId, userObj)) {
@@ -56,5 +56,10 @@ public class UserController {
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/search")
+    public List<UserEntity> searchUsersByNameOrSurname(@RequestParam String searchText) {
+        return userService.findUsersByNameOrSurname(searchText);
     }
 }

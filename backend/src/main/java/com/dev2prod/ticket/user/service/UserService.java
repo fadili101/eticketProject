@@ -23,7 +23,7 @@ public class UserService {
 
     public UserEntity saveUser(UserEntity userObj) {
         return userRepository.save(userObj);
-        
+
     }
 
     public List<UserEntity> getAllUsers() {
@@ -39,7 +39,7 @@ public class UserService {
     }
 
 
-    
+
     public UserEntity assignCaisseToUser(Long userId, Long caisseId) {
         Set<CaisseEntity> caisseSet = null;
         UserEntity user = userRepository.findById(userId).get();
@@ -49,7 +49,7 @@ public class UserService {
         user.setAssignedCaisses(caisseSet);
         return userRepository.save(user);
     }
-    
+
     public boolean updateUser(Long userId, UserEntity depObj) {
         if (userRepository.existsById(userId)) {
             depObj.setUserId(userId); // Assurez-vous que l'ID est bien défini avant de sauvegarder
@@ -59,4 +59,9 @@ public class UserService {
             return false;
         }
     }
+
+    public List<UserEntity> findUsersByNameOrSurname(String searchText) {
+        return userRepository.findByNomUserContainingOrPrenomUserContaining(searchText, searchText);
+    }
+
 }
