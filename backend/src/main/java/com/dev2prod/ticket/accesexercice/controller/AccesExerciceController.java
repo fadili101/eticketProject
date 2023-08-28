@@ -7,6 +7,7 @@ import com.dev2prod.ticket.accesexercice.service.AccesExerciceService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/accesexercice")
 public class AccesExerciceController {

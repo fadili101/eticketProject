@@ -7,6 +7,7 @@ import com.dev2prod.ticket.histgesaur.service.HistGesaurService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/histgesaur")
 public class HistGesaurController {

@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dev2prod.ticket.departement.entity.DepartementEntity;
-import com.dev2prod.ticket.departement.repository.DepartementRepository;
 import com.dev2prod.ticket.workflow.entity.WorkflowEntity;
 import com.dev2prod.ticket.workflow.repository.WorkflowRepository;
 
