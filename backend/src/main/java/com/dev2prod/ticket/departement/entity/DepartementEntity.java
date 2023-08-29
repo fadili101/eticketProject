@@ -12,13 +12,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "P_Departement", schema = "dbo")
+@Table(name = "P_Departement")
 public class DepartementEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDepartement")
-    private Integer idDepartement;
+    @Column(name = "departement_id")
+    private Integer departement_id;
 
     @Column(name = "Departement", length = 50)
     private String departement;

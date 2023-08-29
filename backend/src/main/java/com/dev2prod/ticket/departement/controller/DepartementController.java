@@ -48,7 +48,7 @@ public class DepartementController {
     public DepartementEntity update(@PathVariable Integer id, @RequestBody DepartementEntity entity) {
         DepartementEntity existing = service.getById(id);
         if (existing != null) {
-            entity.setIdDepartement(id);
+            entity.setDepartement_id(id);
             return service.save(entity);
         }
         return null;

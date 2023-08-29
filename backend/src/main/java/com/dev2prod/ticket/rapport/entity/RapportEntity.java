@@ -25,7 +25,7 @@ public class RapportEntity {
     private String rapport;
 
     @Lob
-    @Column(name = "Entete", columnDefinition = "TEXTIMAGE_ON [PRIMARY]")
+    @Column(name = "Entete")
     private String entete;
 
     @Column(name = "Flaf_Traitement")
