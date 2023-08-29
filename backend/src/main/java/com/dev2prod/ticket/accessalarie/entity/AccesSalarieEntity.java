@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "P_Acces_Salarie", schema = "dbo")
+@Table(name = "P_Acces_Salarie")
 public class AccesSalarieEntity {
 
     @Id

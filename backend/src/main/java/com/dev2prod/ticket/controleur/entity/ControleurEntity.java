@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "P_Controleur", schema = "dbo")
+@Table(name = "P_Controleur")
 public class ControleurEntity {
 
     @Id

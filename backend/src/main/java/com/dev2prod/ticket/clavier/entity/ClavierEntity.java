@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "P_Clavier", schema = "dbo")
+@Table(name = "P_Clavier")
 public class ClavierEntity {
 
     @Id
