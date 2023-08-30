@@ -2,12 +2,12 @@ import { DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, debounceTime, delay, of, switchMap, tap } from 'rxjs';
-import { SortColumn, SortDirection } from './DepartementSortable.directive';
-import { Departement } from 'src/app/models/departement';
-import { departementService } from 'src/app/services/departement.service';
-import { User } from 'src/app/models/user';
+import { SortColumn, SortDirection } from './HistsSortable.directive';
+import { HistGesaur } from 'src/app/models/histgesaur';
+import { HistService } from 'src/app/services/hist.service';
+
 interface SearchResult {
-	departements: Departement[];
+	hists: HistGesaur[];
 	total: number;
 }
 
@@ -19,46 +19,42 @@ interface State {
 	sortDirection: SortDirection;
 }
 
-const compare = (v1: string | number | Departement | Departement[] | User[] | null, v2: string | number | Departement | Departement[] | User[] | null) => {
-	if (v1 === null && v2 === null) {
-	  return 0;
-	} else if (v1 === null) {
-	  return -1;
-	} else if (v2 === null) {
-	  return 1;
-	} else {
-	  return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
-	}
-  };
+const compare = (v1: string | number | Date, v2: string | number | Date) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(departements: Departement[], column: SortColumn, direction: string): Departement[] {
+function sort(departements: HistGesaur[], column: SortColumn, direction: string): HistGesaur[] {
 	if (direction === '' || column === '') {
-		return departements;
+	return departements;
 	} else {
-		return [...departements].sort((a, b) => {
+	return [...departements].sort((a, b) => {
 			const res = compare(a[column], b[column]);
 			return direction === 'asc' ? res : -res;
 		});
 	}
 }
 
-function matches(Departement: Departement, term: string) {
+function matches(hist: HistGesaur, term: string) {
+	const searchTerm = term.toLowerCase();
 	return (
-		String(Departement.nom).toLowerCase().includes(term.toLowerCase()) ||
-		String(Departement.type).toLowerCase().includes(term.toLowerCase())
+	  String(hist.nomClient).toLowerCase().includes(searchTerm) ||
+	  String(hist.caissier).toLowerCase().includes(searchTerm) ||
+	  String(hist.modePaiement).toLowerCase().includes(searchTerm) ||
+	  String(hist.nticket).toLowerCase().includes(searchTerm) ||
+	  (typeof hist.montantHT === 'number' && String(hist.montantHT).includes(searchTerm)) ||
+	  (typeof hist.montantTTC === 'number' && String(hist.montantTTC).includes(searchTerm)) ||
+	  (typeof hist.montantTVA === 'number' && String(hist.montantTVA).includes(searchTerm))
 	);
-}
+  }
 
 
 @Injectable({
 	providedIn: 'root'
 })
-export class DepartementsService {
+export class HistesService {
 	private _loading$ = new BehaviorSubject<boolean>(true);
 	private _search$ = new Subject<void>();
-	private _departements$ = new BehaviorSubject<Departement[]>([]);
+	private _hists$ = new BehaviorSubject<HistGesaur[]>([]);
 	private _total$ = new BehaviorSubject<number>(0);
-	DEPARTEMENTS: Departement[] = [];
+	HISTS: HistGesaur[] = [];
 	private _state: State = {
 		page: 1,
 		pageSize: 4,
@@ -69,11 +65,11 @@ export class DepartementsService {
 
 	constructor(private http: HttpClient,
 		private pipe: DecimalPipe,
-		private departementService: departementService
+		private histService: HistService
 	) {
-		this.departementService.getDepartements().subscribe(
+		this.histService.getHists().subscribe(
 			data => {
-				this.DEPARTEMENTS = data;
+				this.HISTS = data;
 			}
 		)
 		this._search$
@@ -85,21 +81,21 @@ export class DepartementsService {
 				tap(() => this._loading$.next(false)),
 			)
 			.subscribe((result) => {
-				this._departements$.next(result.departements);
+				this._hists$.next(result.hists);
 				this._total$.next(result.total);
 			});
 		this._search$.next();
 	}
 	refreshData() {
-        this.departementService.getDepartements().subscribe(
+        this.histService.getHists().subscribe(
             data => {
-                this.DEPARTEMENTS = data;
+                this.HISTS = data;
                 this._search$.next(); // Trigger a new search to update observables
             }
         );
     }
-	get departements$() {
-		return this._departements$.asObservable();
+	get hists$() {
+		return this._hists$.asObservable();
 	}
 	get total$() {
 		return this._total$.asObservable();
@@ -141,14 +137,14 @@ export class DepartementsService {
 		const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
 		// 1. sort
-		let departements = sort(this.DEPARTEMENTS, sortColumn, sortDirection);
+		let hists = sort(this.HISTS, sortColumn, sortDirection);
 
 		// 2. filter
-		departements = departements.filter((departement) => matches(departement, searchTerm));
-		const total = departements.length;
+		hists = hists.filter((hist) => matches(hist, searchTerm));
+		const total = hists.length;
 
 		// 3. paginate
-		departements = departements.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-		return of({ departements, total });
+		hists = hists.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+		return of({ hists, total });
 	}
 }

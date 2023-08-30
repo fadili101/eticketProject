@@ -15,6 +15,9 @@ export class profileService{
 	getProfiles():Observable<any> {
 		return this.http.get(this.URL + 'profil/getProfils')
 	}
+	getData():Observable<any> {
+		return this.http.get(this.URL + 'profil/getProfils')
+	}
 	getProfile(id: Number): Observable<any> {
 		return this.http.get(this.URL + 'profil/' + id);
 	}

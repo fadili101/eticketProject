@@ -1,25 +1,24 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { Departement } from 'src/app/models/departement';
+import { DecimalPipe } from '@angular/common';
+import { Art } from 'src/app/models/art';
 import { Observable, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
-import { DecimalPipe } from '@angular/common';
-import { departementService } from 'src/app/services/departement.service';
+import { artService } from 'src/app/services/art.service';
 import { DynamicService } from '../../dynamic.service';
 import { DynamicSortableHeader, SortEvent } from '../../DynamicSortable.directive';
 
 @Component({
-  selector: 'departement-list',
-  templateUrl: './Departement.component.html',
-  styleUrls: ['./Departement.component.css'],
+  selector: 'app-art-list',
+  templateUrl: './art-list.component.html',
+  styleUrls: ['./art-list.component.css'],
   providers: [
-	{ provide: 'dataService', useClass: departementService }, // Provide the dataService using 'dataService' token
+	{ provide: 'dataService', useClass: artService }, // Provide the dataService using 'dataService' token
 	DynamicService,
 	DecimalPipe
-]
+	]
 })
-export class DepartementList {
-  	departements$!: Observable<Departement[]>;
+export class ArtListComponent {
+  arts$!: Observable<Art[]>;
 	total$!: Observable<number>;
 	hasData$!: Observable<boolean>;
 
@@ -27,12 +26,15 @@ export class DepartementList {
   	headers!: QueryList<DynamicSortableHeader>;
 
 	constructor(
-		public service: DynamicService<Departement>,
+		public service: DynamicService<Art>,
 		public dialog: MatDialog,
 	) {
 	}
 	ngOnInit(): void{
 		this.getData();
+
+		// check is data being emitting
+		// this.users$.subscribe(users => console.log('Fetched users:', users));
 	}
 	onSort({ column, direction }: SortEvent) {
 		this.headers.forEach((header) => {
@@ -51,14 +53,14 @@ export class DepartementList {
 	// 		autoFocus: false
 	// 	});
 	// 	dialogRef.afterClosed().subscribe(result => {
-	// 		this.service.refreshData();
+	// 		this.profilesService.refreshData();
 	// 		this.getData();
 	// 	});
 	// }
 	getData() {
-		this.departements$ = this.service.data$;
+		this.arts$ = this.service.data$;
 		this.total$ = this.service.total$;
-		this.hasData$ = this.departements$.pipe(map(departements => departements.length > 0));
+		this.hasData$ = this.arts$.pipe(map(arts => arts.length > 0));
 		this.service.triggerSearch()
 	}
 }

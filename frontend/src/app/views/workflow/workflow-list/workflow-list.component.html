@@ -19,18 +19,18 @@
 		<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col" sortable="nomProfil" (sort)="onSort($event)">Nom</th>
-				<th scope="col" sortable="description" (sort)="onSort($event)">Type</th>
+				<th scope="col" sortable="nom" (sort)="onSort($event)">Nom</th>
+				<th scope="col" sortable="parent" (sort)="onSort($event)">Parent Name</th>
 				<!-- <th scope="col">Actions</th> -->
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let profile of profiles$ | async">
-				<th scope="row">{{profile.profilId}}</th>
+			<tr *ngFor="let workflow of workflows$ | async">
+				<th scope="row">{{workflow.workFlowId}}</th>
 				<td>
-					<ngb-highlight [result]="profile.nomProfil" [term]="service.searchTerm"></ngb-highlight>
+					<ngb-highlight [result]="workflow.nom" [term]="service.searchTerm"></ngb-highlight>
 				</td>
-				<td><ngb-highlight [result]="profile.description" [term]="service.searchTerm"></ngb-highlight></td>
+				<td><ngb-highlight [result]="workflow.parent ? workflow.parent.nom : ''" [term]="service.searchTerm"></ngb-highlight></td>
 				<td>
 				<!-- <button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(departement)">
 					<i class="material-icons">edit</i>

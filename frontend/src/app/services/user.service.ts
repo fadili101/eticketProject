@@ -24,6 +24,9 @@ export class UserService {
   // register(form:register):Observable<any> {
   //   return this.http.post(this.URL + 'api/auth/register', form );
   // }
+  getData(): Observable<any> {
+	  return this.http.get(this.URL + 'user/getUsers');
+  }
   getUsers(): Observable<any> {
 	  return this.http.get(this.URL + 'user/getUsers');
   }

@@ -6,7 +6,6 @@ import { ModalComponent } from './modal/modal.component';
 import { UserRoutingModule } from './user-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdSortableHeader } from './UsersList/sortable.directive';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -16,6 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { DynamicSortableHeader } from '../DynamicSortable.directive';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 		DecimalPipe,
 		AsyncPipe,
 		NgbTypeaheadModule,
-		NgbdSortableHeader,
+		DynamicSortableHeader,
 		NgbPaginationModule,
 		NgIf,
     MatSelectModule,

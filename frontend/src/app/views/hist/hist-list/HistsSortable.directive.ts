@@ -1,7 +1,8 @@
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
-import { Profil } from 'src/app/models/profil';
+import { HistGesaur } from './../../../models/histgesaur';
 
-export type SortColumn = keyof Profil | '';
+
+export type SortColumn = keyof HistGesaur | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
 
@@ -19,7 +20,7 @@ export interface SortEvent {
 		'(click)': 'rotate()',
 	},
 })
-export class DepeartementNgbdSortableHeader {
+export class HistsNgbdSortableHeader {
 	@Input() sortable: SortColumn = '';
 	@Input() direction: SortDirection = '';
 	@Output() sort = new EventEmitter<SortEvent>();

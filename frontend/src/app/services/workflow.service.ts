@@ -11,10 +11,10 @@ export class WorkflowService {
   constructor( private http: HttpClient ) {
     this.URL = environment.apiURL;
   }
-  ngOnInit (){
-
-  }
   getWorkflows():Observable<any>{
+    return this.http.get(this.URL + 'workflow/getworkflow');
+  }
+  getData():Observable<any>{
     return this.http.get(this.URL + 'workflow/getworkflow');
   }
   getWorkflow(id: Number): Observable<any>{

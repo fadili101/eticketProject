@@ -1,25 +1,24 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { Departement } from 'src/app/models/departement';
+import { DecimalPipe } from '@angular/common';
+import { Caisse } from 'src/app/models/caisse';
 import { Observable, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
-import { DecimalPipe } from '@angular/common';
-import { departementService } from 'src/app/services/departement.service';
+import { caisseService } from 'src/app/services/caisse.service';
 import { DynamicService } from '../../dynamic.service';
 import { DynamicSortableHeader, SortEvent } from '../../DynamicSortable.directive';
 
 @Component({
-  selector: 'departement-list',
-  templateUrl: './Departement.component.html',
-  styleUrls: ['./Departement.component.css'],
+  selector: 'app-caisse-list',
+  templateUrl: './caisse-list.component.html',
+  styleUrls: ['./caisse-list.component.css'],
   providers: [
-	{ provide: 'dataService', useClass: departementService }, // Provide the dataService using 'dataService' token
+	{ provide: 'dataService', useClass: caisseService }, // Provide the dataService using 'dataService' token
 	DynamicService,
 	DecimalPipe
 ]
 })
-export class DepartementList {
-  	departements$!: Observable<Departement[]>;
+export class CaisseListComponent {
+  caisses$!: Observable<Caisse[]>;
 	total$!: Observable<number>;
 	hasData$!: Observable<boolean>;
 
@@ -27,7 +26,7 @@ export class DepartementList {
   	headers!: QueryList<DynamicSortableHeader>;
 
 	constructor(
-		public service: DynamicService<Departement>,
+		public service: DynamicService<Caisse>,
 		public dialog: MatDialog,
 	) {
 	}
@@ -43,7 +42,7 @@ export class DepartementList {
 		this.service.sortColumn = column;
 		this.service.sortDirection = direction;
 	}
-	// openDialog(departement:Departement): void {
+	// openDialog(departement:Caisse): void {
 	// 	let dialogRef = this.dialog.open(ModalComponent, {
 	// 		data: departement,
 	// 		width: '80%',
@@ -56,9 +55,9 @@ export class DepartementList {
 	// 	});
 	// }
 	getData() {
-		this.departements$ = this.service.data$;
+		this.caisses$ = this.service.data$;
 		this.total$ = this.service.total$;
-		this.hasData$ = this.departements$.pipe(map(departements => departements.length > 0));
+		this.hasData$ = this.caisses$.pipe(map(caisses => caisses.length > 0));
 		this.service.triggerSearch()
 	}
 }

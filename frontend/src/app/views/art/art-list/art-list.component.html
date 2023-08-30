@@ -19,18 +19,20 @@
 		<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col" sortable="nomProfil" (sort)="onSort($event)">Nom</th>
-				<th scope="col" sortable="description" (sort)="onSort($event)">Type</th>
+				<th scope="col" sortable="cpt" (sort)="onSort($event)">Compteur</th>
+				<th scope="col" sortable="jtl" (sort)="onSort($event)">JTL</th>
+				<th scope="col" sortable="libel" (sort)="onSort($event)">Libele</th>
 				<!-- <th scope="col">Actions</th> -->
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let profile of profiles$ | async">
-				<th scope="row">{{profile.profilId}}</th>
+			<tr *ngFor="let art of arts$ | async">
+				<th scope="row">{{art.idart}}</th>
 				<td>
-					<ngb-highlight [result]="profile.nomProfil" [term]="service.searchTerm"></ngb-highlight>
+					<ngb-highlight [result]="art.cpt" [term]="service.searchTerm"></ngb-highlight>
 				</td>
-				<td><ngb-highlight [result]="profile.description" [term]="service.searchTerm"></ngb-highlight></td>
+				<td><ngb-highlight [result]="art.jtl" [term]="service.searchTerm"></ngb-highlight></td>
+				<td><ngb-highlight [result]="art.libel" [term]="service.searchTerm"></ngb-highlight></td>
 				<td>
 				<!-- <button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(departement)">
 					<i class="material-icons">edit</i>

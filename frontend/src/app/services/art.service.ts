@@ -7,21 +7,21 @@ import { Observable } from 'rxjs';
 @Injectable({
 	providedIn: 'root'
   })
-export class caisseService{
+export class artService{
 	URL: string;
 	constructor( private http: HttpClient ) {
 		this.URL = environment.apiURL;
 	}
-	getCaisses():Observable<any> {
-		return this.http.get(this.URL + 'caisse/getCaisses')
+	getArts():Observable<any> {
+		return this.http.get(this.URL + 'arts')
 	}
 	getData():Observable<any> {
-		return this.http.get(this.URL + 'caisse/getCaisses')
+		return this.http.get(this.URL + 'arts')
 	}
-	getCaisse(id:Number): Observable<any>{
-		return this.http.get(this.URL + 'caisse/' + id);
+	getArt(id:Number): Observable<any>{
+		return this.http.get(this.URL + 'arts/' + id);
 	}
-	addCaisse(form: any): Observable<any>{
-		return this.http.post(this.URL + 'caisse/save', form);
+	addArts(form: any): Observable<any>{
+		return this.http.post(this.URL + 'arts', form);
 	}
 }

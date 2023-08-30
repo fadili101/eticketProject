@@ -5,7 +5,6 @@ import { DepartementList } from './DepartementList/Departement.component';
 import { DepartementRoutingModule } from './departement-routing.module';
 import { ModalComponent } from './modal/modal.component';
 import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { DepeartementNgbdSortableHeader } from './DepartementList/DepartementSortable.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DynamicSortableHeader } from '../DynamicSortable.directive';
 
 
 
@@ -32,7 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 		DecimalPipe,
 		AsyncPipe,
 		NgbTypeaheadModule,
-		DepeartementNgbdSortableHeader,
+		DynamicSortableHeader,
 		NgbPaginationModule,
 		NgIf,
     MatDialogModule,

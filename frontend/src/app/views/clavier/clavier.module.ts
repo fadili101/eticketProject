@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AsyncPipe, CommonModule, DecimalPipe, NgFor, NgIf } from '@angular/common';
-import { ProfileListeComponent } from './profile-liste/profile-liste.component';
-import { ProfileRoutingModule } from './profile-routing.module';
+import { ClavierlistComponent } from './clavierlist/clavierlist.component';
+import { ClavierRoutingModule } from './clavier.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -19,17 +19,17 @@ import { DynamicSortableHeader } from '../DynamicSortable.directive';
 
 @NgModule({
   declarations: [
-    ProfileListeComponent
+    ClavierlistComponent
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule,
-		FormsModule,
+    ClavierRoutingModule,
+    FormsModule,
     NgFor,
 		DecimalPipe,
 		AsyncPipe,
 		NgbTypeaheadModule,
-		DynamicSortableHeader,
+    DynamicSortableHeader,
 		NgbPaginationModule,
 		NgIf,
     MatSelectModule,
@@ -39,10 +39,11 @@ import { DynamicSortableHeader } from '../DynamicSortable.directive';
     MatInputModule,
     MatTooltipModule,
     MatDialogModule,
+    MatDialogModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  exports: [ProfileRoutingModule],
+  exports: [ClavierRoutingModule],
 })
-export class ProfileModule { }
+export class ClavierModule { }

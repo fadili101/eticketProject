@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { AsyncPipe, CommonModule, DecimalPipe, NgFor, NgIf } from '@angular/common';
-import { ProfileListeComponent } from './profile-liste/profile-liste.component';
-import { ProfileRoutingModule } from './profile-routing.module';
+import { CaisseListComponent } from './caisse-list/caisse-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -13,18 +12,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+// import { CaissesNgbdSortableHeader } from './caisse-list/CaissesSortable.directive';
+import { CaissesRoutingModule } from './caisses-routing.module';
 import { DynamicSortableHeader } from '../DynamicSortable.directive';
+
 
 
 
 @NgModule({
   declarations: [
-    ProfileListeComponent
+    CaisseListComponent
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule,
-		FormsModule,
     NgFor,
 		DecimalPipe,
 		AsyncPipe,
@@ -32,6 +32,8 @@ import { DynamicSortableHeader } from '../DynamicSortable.directive';
 		DynamicSortableHeader,
 		NgbPaginationModule,
 		NgIf,
+    MatDialogModule,
+    FormsModule,
     MatSelectModule,
     MatButtonModule,
     MatRippleModule,
@@ -43,6 +45,7 @@ import { DynamicSortableHeader } from '../DynamicSortable.directive';
     MatSnackBarModule,
     ReactiveFormsModule
   ],
-  exports: [ProfileRoutingModule],
+  exports: [CaissesRoutingModule],
+  schemas: [NO_ERRORS_SCHEMA]
 })
-export class ProfileModule { }
+export class CaissesModule { }

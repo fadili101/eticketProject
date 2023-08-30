@@ -19,18 +19,18 @@
 		<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col" sortable="nomProfil" (sort)="onSort($event)">Nom</th>
-				<th scope="col" sortable="description" (sort)="onSort($event)">Type</th>
+				<th scope="col" sortable="nomCaisse" (sort)="onSort($event)">Nom</th>
+				<th scope="col" sortable="descriptionCaisse" (sort)="onSort($event)">Type</th>
 				<!-- <th scope="col">Actions</th> -->
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let profile of profiles$ | async">
-				<th scope="row">{{profile.profilId}}</th>
+			<tr *ngFor="let caisse of caisses$ | async">
+				<th scope="row">{{caisse.caisseId}}</th>
 				<td>
-					<ngb-highlight [result]="profile.nomProfil" [term]="service.searchTerm"></ngb-highlight>
+					<ngb-highlight [result]="caisse.nomCaisse" [term]="service.searchTerm"></ngb-highlight>
 				</td>
-				<td><ngb-highlight [result]="profile.description" [term]="service.searchTerm"></ngb-highlight></td>
+				<td><ngb-highlight [result]="caisse.descriptionCaisse" [term]="service.searchTerm"></ngb-highlight></td>
 				<td>
 				<!-- <button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(departement)">
 					<i class="material-icons">edit</i>

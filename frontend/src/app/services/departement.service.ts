@@ -15,6 +15,9 @@ export class departementService{
 	getDepartements():Observable<any> {
 		return this.http.get(this.URL + 'departements/getdepartements')
 	}
+	getData():Observable<any> {
+		return this.http.get(this.URL + 'departements/getdepartements')
+	}
 	getDepartement(id: Number): Observable<any> {
 		return this.http.get(this.URL + 'departements/' + id);
 	}
