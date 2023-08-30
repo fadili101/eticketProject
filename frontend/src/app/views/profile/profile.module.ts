@@ -14,12 +14,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicSortableHeader } from '../DynamicSortable.directive';
+import { AddComponent } from './add/add.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 
 @NgModule({
   declarations: [
-    ProfileListeComponent
+    ProfileListeComponent,
+    AddComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,

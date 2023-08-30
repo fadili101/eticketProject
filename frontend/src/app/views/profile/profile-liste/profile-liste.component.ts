@@ -6,6 +6,7 @@ import { Profil } from 'src/app/models/profil';
 import { profileService } from 'src/app/services/profile.service';
 import { DynamicService } from '../../dynamic.service';
 import { DynamicSortableHeader, SortEvent } from '../../DynamicSortable.directive';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-profile-liste',
@@ -32,9 +33,6 @@ export class ProfileListeComponent {
 	}
 	ngOnInit(): void{
 		this.getData();
-
-		// check is data being emitting
-		// this.users$.subscribe(users => console.log('Fetched users:', users));
 	}
 	onSort({ column, direction }: SortEvent) {
 		this.headers.forEach((header) => {
@@ -45,22 +43,22 @@ export class ProfileListeComponent {
 		this.service.sortColumn = column;
 		this.service.sortDirection = direction;
 	}
-	// openDialog(departement:Departement): void {
-	// 	let dialogRef = this.dialog.open(ModalComponent, {
-	// 		data: departement,
-	// 		width: '80%',
-	// 		height: '80%',
-	// 		autoFocus: false
-	// 	});
-	// 	dialogRef.afterClosed().subscribe(result => {
-	// 		this.profilesService.refreshData();
-	// 		this.getData();
-	// 	});
-	// }
+	openDialog(profile: Profil): void {
+		let dialogRef = this.dialog.open(ModalComponent, {
+			data: profile,
+			width: '80%',
+			height: '80%',
+			autoFocus: false
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			this.service.refreshData();
+			this.getData();
+		});
+	}
 	getData() {
 		this.profiles$ = this.service.data$;
 		this.total$ = this.service.total$;
 		this.hasData$ = this.profiles$.pipe(map(profiles => profiles.length > 0));
-		this.service.triggerSearch()
+		this.service.triggerSearch();
 	}
 }

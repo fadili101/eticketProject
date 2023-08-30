@@ -15,6 +15,13 @@ const routes: Routes = [
       title: 'Profile List',
     },
   },
+  {
+    path: 'add',
+    component: ProfileListeComponent,
+    data: {
+      title: 'Creer Un Profile',
+    },
+  },
 ];
 
 @NgModule({

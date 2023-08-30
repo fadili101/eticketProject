@@ -15,13 +15,15 @@ import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootst
 // import { CaissesNgbdSortableHeader } from './caisse-list/CaissesSortable.directive';
 import { CaissesRoutingModule } from './caisses-routing.module';
 import { DynamicSortableHeader } from '../DynamicSortable.directive';
+import { AddComponent } from './add/add.component';
 
 
 
 
 @NgModule({
   declarations: [
-    CaisseListComponent
+    CaisseListComponent,
+    AddComponent
   ],
   imports: [
     CommonModule,

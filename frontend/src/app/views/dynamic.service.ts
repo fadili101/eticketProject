@@ -106,9 +106,16 @@ export class DynamicService<T> {
 
 
 	}
-
+	refreshData() : void{
+		this.dataService.getData().subscribe(
+			data => {
+				this.DATA = data;
+			}
+			);
+			this._search$.next();
+	}
 	triggerSearch() {
-		this._loading$.next(true); // Set loading to true before starting search
+		this._loading$.next(true);
 		this._search$.next();
 	}
 	get data$(): Observable<T[]> {

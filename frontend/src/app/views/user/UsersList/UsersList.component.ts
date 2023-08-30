@@ -47,22 +47,23 @@ export class UsersListComponent {
 		this.service.sortColumn = column;
 		this.service.sortDirection = direction;
 	}
-	// openDialog(user: User): void {
-	// 	let dialogRef = this.dialog.open(ModalComponent, {
-	// 		data: user,
-	// 		width: '80%',
-	// 		height: '80%',
-	// 		autoFocus: false
-	// 	});
-	// 	dialogRef.afterClosed().subscribe(result => {
-	// 		this.service.refreshData();
-	// 		this.getData();
-	// 	});
-	// }
+	openDialog(user: User): void {
+		let dialogRef = this.dialog.open(ModalComponent, {
+			data: user,
+			width: '80%',
+			height: '80%',
+			autoFocus: false
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			this.service.refreshData();
+			this.getData();
+		});
+	}
 	getData() {
 		this.users$ = this.service.data$;
 		this.total$ = this.service.total$;
 		this.hasData$ = this.users$.pipe(map(users => users.length > 0));
 		this.service.triggerSearch()
+		console.log(this.users$)
 	}
 }

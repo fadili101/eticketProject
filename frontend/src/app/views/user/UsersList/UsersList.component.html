@@ -38,12 +38,12 @@
 				<td><span *ngIf="user.profil"><ngb-highlight [result]="user.profil.nomProfil" [term]="service.searchTerm"></ngb-highlight></span></td>
 				<td>
 					<i class="fas fa-circle me-2" *ngIf="user.actif" style="color: green;"></i>
-					<i class="fas fa-circle" *ngIf="!user.actif" style="color: red;"></i>
+					<i class="fas fa-circle me-2" *ngIf="!user.actif" style="color: red;"></i>
 				</td>
 				<td>
-				<button type="button" rel="tooltip" class="btn btn-success">
-					<i class="material-icons">edit</i>
-				</button>
+					<button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(user)">
+						<i class="material-icons">edit</i>
+					</button>
 				</td>
 			</tr>
 		</tbody>

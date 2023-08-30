@@ -19,9 +19,9 @@
 		<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col" sortable="nomProfil" (sort)="onSort($event)">Nom</th>
+				<th scope="col" sortable="nom_rofil" (sort)="onSort($event)">Nom</th>
 				<th scope="col" sortable="description" (sort)="onSort($event)">Type</th>
-				<!-- <th scope="col">Actions</th> -->
+				<th scope="col">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,9 +32,9 @@
 				</td>
 				<td><ngb-highlight [result]="profile.description" [term]="service.searchTerm"></ngb-highlight></td>
 				<td>
-				<!-- <button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(departement)">
-					<i class="material-icons">edit</i>
-				</button> -->
+					<button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(profile)">
+						<i class="material-icons">edit</i>
+					</button>
 				</td>
 			</tr>
 		</tbody>

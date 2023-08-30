@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
+import { Profil } from '../models/profil';
 
 
 @Injectable({
@@ -24,4 +25,7 @@ export class profileService{
 	addProfile(form: any): Observable<any> {
 		return this.http.post(this.URL + 'profil/save', form);
 	}
+	updateProfile(form: Profil): Observable<any> {
+		return this.http.put(this.URL + 'profil/update/' + form.profilId, form);
+	  }
 }

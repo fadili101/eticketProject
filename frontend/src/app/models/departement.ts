@@ -1,8 +1,8 @@
 import { User } from "./user";
 
 export interface Departement {
-    departementId: number;
-    nom: string;
+    departement_id: number;
+    departement: string;
     type: string;
     parent: Departement | null;
     children: Departement[];

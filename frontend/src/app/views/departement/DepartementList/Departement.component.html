@@ -26,7 +26,7 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let departement of departements$ | async">
-				<th scope="row">{{departement.departementId}}</th>
+				<th scope="row">{{departement.departement_id}}</th>
 				<td>
 					<ngb-highlight [result]="departement.nom" [term]="service.searchTerm"></ngb-highlight>
 				</td>

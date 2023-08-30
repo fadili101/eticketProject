@@ -24,7 +24,8 @@ export const ROUTES = [
     title: 'Profile',
     icon: 'fas fa-th-large me-2',
     children: [
-      { path: 'list', title: 'Liste Des Profiles'}
+      { path: 'list', title: 'Liste Des Profiles'},
+      { path: 'add', title: 'Creer Un Profile'},
     ]
   },
   {
