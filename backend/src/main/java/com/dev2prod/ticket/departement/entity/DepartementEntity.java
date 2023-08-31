@@ -28,8 +28,9 @@ public class DepartementEntity {
     @Column(name = "Departement", length = 50)
     private String departement;
 
-    @Column(name = "idDepratementParent")
-    private Integer idDepartementParent;
+    @ManyToOne  // Un département peut avoir zéro ou un seul parent.
+    @JoinColumn(name = "idDepartementParent", referencedColumnName = "departement_id")
+    private DepartementEntity departementParent;
 
     @Column(name = "FlagTraitement")
     private Integer flagTraitement;
