@@ -16,10 +16,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -49,9 +51,12 @@ public class UserEntity {
 	    @JoinColumn(name = "profil_id") // le nom de la colonne dans la table User
 	    private ProfilEntity profil;
 
-	    @ManyToOne(fetch = FetchType.EAGER)
+	    /*@ManyToOne(fetch = FetchType.EAGER)
 	    @JoinColumn(name = "departement_id")
-	    private DepartementEntity departement;
+	    private DepartementEntity departement;*/
+	    
+	    @OneToMany(mappedBy = "responsable")
+	    private List<DepartementEntity> departementsResponsables;
 
 	
 	    

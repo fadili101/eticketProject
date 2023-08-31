@@ -34,7 +34,7 @@ public class ArtController {
         return artService.saveArt(art);
     }
 
-    @PutMapping("/arts/{id}")
+    @PutMapping("/{id}")
     public ArtEntity updateArt(@PathVariable Integer id, @RequestBody ArtEntity art) {
         return artService.updateArt(id, art);
     }

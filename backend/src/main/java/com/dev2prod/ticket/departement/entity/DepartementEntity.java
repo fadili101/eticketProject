@@ -1,10 +1,14 @@
 package com.dev2prod.ticket.departement.entity;
 
+import com.dev2prod.ticket.user.entity.UserEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,8 +36,10 @@ public class DepartementEntity {
     @Column(name = "TypeDepartement")
     private Integer typeDepartement;
 
-    @Column(name = "Responsable")
-    private Integer responsable;
+    @ManyToOne  // Plusieurs départements peuvent être gérés par un seul utilisateur.
+    @JoinColumn(name = "Responsable", referencedColumnName = "userId")  // Jointure basée sur le champ "Responsable"
+    private UserEntity responsable;
+
 
     // Constructeurs, accesseurs et mutateurs (omis pour brièveté)
 }
