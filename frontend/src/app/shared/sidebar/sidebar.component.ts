@@ -33,7 +33,8 @@ export const ROUTES = [
     title: 'Caisse',
     icon: 'fas fa-th-large me-2',
     children: [
-      { path: 'list', title: 'Liste Des Profiles'}
+      { path: 'list', title: 'Liste Des Caisses'},
+      { path: 'add', title: 'Creer une caisse'}
     ]
   },
   {
@@ -41,7 +42,8 @@ export const ROUTES = [
     title: 'Workflow',
     icon: 'fas fa-th-large me-2',
     children: [
-      { path: 'list', title: 'Liste Des Workflow'}
+      { path: 'list', title: 'Liste Des Workflow'},
+      { path: 'add', title: 'Creer Un Workflow'},
     ]
   },
   {
@@ -49,7 +51,8 @@ export const ROUTES = [
     title: 'Art',
     icon: 'fas fa-th-large me-2',
     children: [
-      { path: 'list', title: 'Liste Des Articles'}
+      { path: 'list', title: 'Liste Des Articles'},
+      { path: 'add', title: 'Creer Un Article'},
     ]
   },
   {
@@ -57,7 +60,8 @@ export const ROUTES = [
     title: 'Hist',
     icon: 'fas fa-th-large me-2',
     children: [
-      { path: 'list', title: 'Liste Des Hist'}
+      { path: 'list', title: 'Liste Des Hist'},
+      { path: 'add', title: 'Creer un Hist'}
     ]
   },
   {
@@ -65,7 +69,8 @@ export const ROUTES = [
     title: 'Clavier',
     icon: 'fas fa-th-large me-2',
     children: [
-      { path: 'list', title: 'Liste Des Claviers'}
+      { path: 'list', title: 'Liste Des Claviers'},
+      { path: 'add', title: 'Ajouter Une Clavier'}
     ]
   },
 ];

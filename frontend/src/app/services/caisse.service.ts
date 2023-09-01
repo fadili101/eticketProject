@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
+import { Caisse } from '../models/caisse';
 
 
 @Injectable({
@@ -24,4 +25,7 @@ export class caisseService{
 	addCaisse(form: any): Observable<any>{
 		return this.http.post(this.URL + 'caisse/save', form);
 	}
+	updateCaisse(form: Caisse): Observable<any> {
+		return this.http.put(this.URL + 'caisse/update/' + form.caisseId, form);
+	  }
 }

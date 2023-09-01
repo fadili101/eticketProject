@@ -1,15 +1,15 @@
 export interface HistGesaur {
-	nLigne: number;
+	nligne: number;
 	datee: Date;
 	caissier: string;
 	designation: string;
 	nticket: string;
-	nOps: string;
+	nops: string;
 	montantHT: number;
 	montantTVA: number;
 	montantTTC: number;
 	nomClient: string;
 	modePaiement: string;
-	nCheque: string;
+	ncheque: string;
 	quantite: number;
   }
