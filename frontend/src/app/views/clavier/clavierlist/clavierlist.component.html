@@ -15,22 +15,24 @@
 			<span class="visually-hidden">Loading...</span>
 		</div>
 	</div>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col" sortable="idNum" (sort)="onSort($event)">Nom</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let item of claviers$ | async">
-				<th scope="row">{{item.idNum}}</th>
-				<td>
-					<ngb-highlight [result]="item.libelle" [term]="service.searchTerm"></ngb-highlight>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col" sortable="idNum" (sort)="onSort($event)">Nom</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of claviers$ | async">
+					<th scope="row">{{item.idNum}}</th>
+					<td>
+						<ngb-highlight [result]="item.libelle" [term]="service.searchTerm"></ngb-highlight>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<div class="d-flex justify-content-between p-2">
 		<ngb-pagination

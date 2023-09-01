@@ -14,11 +14,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicSortableHeader } from '../DynamicSortable.directive';
+import { ModalComponent } from './modal/modal.component';
+import { AddComponent } from './add/add.component';
 
 
 @NgModule({
   declarations: [
-    ArtListComponent
+    ArtListComponent,
+    ModalComponent,
+    AddComponent
   ],
   imports: [
     CommonModule,

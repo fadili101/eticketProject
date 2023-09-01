@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkflowListComponent } from './workflow-list/workflow-list.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,14 @@ const routes: Routes = [
     path: 'list',
     component: WorkflowListComponent,
     data: {
-      title: 'Profile List',
+      title: 'List Des Workflow',
+    },
+  },
+  {
+    path: 'add',
+    component: AddComponent,
+    data: {
+      title: 'Creer un Workflow',
     },
   },
 ];

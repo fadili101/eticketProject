@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { AsyncPipe, CommonModule, DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,12 +14,16 @@ import { NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootst
 import { WorkflowListComponent } from './workflow-list/workflow-list.component';
 import { WorkflowRoutingModule } from './workflow.routing';
 import { DynamicSortableHeader } from '../DynamicSortable.directive';
+import { AddComponent } from './add/add.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 
 @NgModule({
   declarations: [
-    WorkflowListComponent
+    WorkflowListComponent,
+    AddComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,

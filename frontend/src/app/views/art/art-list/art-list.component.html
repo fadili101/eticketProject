@@ -15,14 +15,14 @@
 			<span class="visually-hidden">Loading...</span>
 		</div>
 	</div>
-	<table class="table table-striped">
+	<div class="table-responsive"><table class="table table-striped">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col" sortable="cpt" (sort)="onSort($event)">Compteur</th>
 				<th scope="col" sortable="jtl" (sort)="onSort($event)">JTL</th>
 				<th scope="col" sortable="libel" (sort)="onSort($event)">Libele</th>
-				<!-- <th scope="col">Actions</th> -->
+				<th scope="col">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,13 +34,14 @@
 				<td><ngb-highlight [result]="art.jtl" [term]="service.searchTerm"></ngb-highlight></td>
 				<td><ngb-highlight [result]="art.libel" [term]="service.searchTerm"></ngb-highlight></td>
 				<td>
-				<!-- <button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(departement)">
+				<button type="button" rel="tooltip" class="btn btn-success" (click)="openDialog(art)">
 					<i class="material-icons">edit</i>
-				</button> -->
+				</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+</div>
 
 	<div class="d-flex justify-content-between p-2">
 		<ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">

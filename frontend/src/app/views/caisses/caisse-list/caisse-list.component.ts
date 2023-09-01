@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { caisseService } from 'src/app/services/caisse.service';
 import { DynamicService } from '../../dynamic.service';
 import { DynamicSortableHeader, SortEvent } from '../../DynamicSortable.directive';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-caisse-list',
@@ -42,18 +43,18 @@ export class CaisseListComponent {
 		this.service.sortColumn = column;
 		this.service.sortDirection = direction;
 	}
-	// openDialog(departement:Caisse): void {
-	// 	let dialogRef = this.dialog.open(ModalComponent, {
-	// 		data: departement,
-	// 		width: '80%',
-	// 		height: '80%',
-	// 		autoFocus: false
-	// 	});
-	// 	dialogRef.afterClosed().subscribe(result => {
-	// 		this.service.refreshData();
-	// 		this.getData();
-	// 	});
-	// }
+	openDialog(caisse: Caisse): void {
+		let dialogRef = this.dialog.open(ModalComponent, {
+			data: caisse,
+			width: '80%',
+			height: '80%',
+			autoFocus: false
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			this.service.refreshData();
+			this.getData();
+		});
+	}
 	getData() {
 		this.caisses$ = this.service.data$;
 		this.total$ = this.service.total$;

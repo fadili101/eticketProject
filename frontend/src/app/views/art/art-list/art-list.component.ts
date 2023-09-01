@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { artService } from 'src/app/services/art.service';
 import { DynamicService } from '../../dynamic.service';
 import { DynamicSortableHeader, SortEvent } from '../../DynamicSortable.directive';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-art-list',
@@ -45,18 +46,18 @@ export class ArtListComponent {
 		this.service.sortColumn = column;
 		this.service.sortDirection = direction;
 	}
-	// openDialog(departement:Departement): void {
-	// 	let dialogRef = this.dialog.open(ModalComponent, {
-	// 		data: departement,
-	// 		width: '80%',
-	// 		height: '80%',
-	// 		autoFocus: false
-	// 	});
-	// 	dialogRef.afterClosed().subscribe(result => {
-	// 		this.profilesService.refreshData();
-	// 		this.getData();
-	// 	});
-	// }
+	openDialog(art: Art): void {
+		let dialogRef = this.dialog.open(ModalComponent, {
+			data: art,
+			width: '80%',
+			height: '80%',
+			autoFocus: false
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			this.service.refreshData();
+			this.getData();
+		});
+	}
 	getData() {
 		this.arts$ = this.service.data$;
 		this.total$ = this.service.total$;

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HistListComponent } from './hist-list/hist-list.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,13 @@ const routes: Routes = [
     component: HistListComponent,
     data: {
       title: 'Hist List',
+    },
+  },
+  {
+    path: 'add',
+    component: AddComponent,
+    data: {
+      title: 'Creer un hist',
     },
   },
 ];

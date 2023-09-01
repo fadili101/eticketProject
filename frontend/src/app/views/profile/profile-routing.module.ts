@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileListeComponent } from './profile-liste/profile-liste.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    component: ProfileListeComponent,
+    component: AddComponent,
     data: {
       title: 'Creer Un Profile',
     },

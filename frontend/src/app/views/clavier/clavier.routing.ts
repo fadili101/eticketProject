@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClavierlistComponent } from './clavierlist/clavierlist.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,14 @@ const routes: Routes = [
     data: {
       title: 'Clavier List',
     },
-  }
+  },
+  {
+    path: 'add',
+    component: AddComponent,
+    data: {
+      title: 'Clavier List',
+    },
+  },
 ];
 
 @NgModule({
