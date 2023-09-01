@@ -5,6 +5,7 @@ import com.dev2prod.ticket.user.entity.UserEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,9 +40,12 @@ public class DepartementEntity {
     @JoinColumn(name = "TypeDepartement", referencedColumnName = "typeDepartement_id")
     private TypeDepartementEntity typeDepartement;
 
-    @ManyToOne  // Plusieurs départements peuvent être gérés par un seul utilisateur.
+    @ManyToOne(fetch = FetchType.EAGER)  // Plusieurs départements peuvent être gérés par un seul utilisateur.
     @JoinColumn(name = "Responsable", referencedColumnName = "userId")  // Jointure basée sur le champ "Responsable"
     private UserEntity responsable;
+    /*@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "responsable")
+    private UserEntity responsable;*/
 
 
     // Constructeurs, accesseurs et mutateurs (omis pour brièveté)
