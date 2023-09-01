@@ -60,5 +60,8 @@ export class DepartementList {
 		this.total$ = this.service.total$;
 		this.hasData$ = this.departements$.pipe(map(departements => departements.length > 0));
 		this.service.triggerSearch()
+		this.departements$.subscribe( t => {
+			console.log(t)
+		})
 	}
 }

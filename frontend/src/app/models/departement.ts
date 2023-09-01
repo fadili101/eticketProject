@@ -1,10 +1,11 @@
+import { TypeDepartement } from "./typeDepartement";
 import { User } from "./user";
 
 export interface Departement {
     departement_id: number;
+    idDepartementParent: number | null;
     departement: string;
-    type: string;
-    parent: Departement | null;
-    children: Departement[];
-    userSet: User[];
+    flagTraitement: number;
+    typeDepartement: TypeDepartement;
+    responsable: User;
 }

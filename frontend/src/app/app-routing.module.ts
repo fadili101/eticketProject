@@ -17,10 +17,10 @@ const routes: Routes = [
         path: 'user',
         loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
       },
-      // {
-      //   path: 'Departement',
-      //   loadChildren: () => import('./views/departement/departement.module').then(m => m.DepartementModule)
-      // },
+      {
+        path: 'Departement',
+        loadChildren: () => import('./views/departement/departement.module').then(m => m.DepartementModule)
+      },
       {
         path: 'Profile',
         loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule)
