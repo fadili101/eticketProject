@@ -6,6 +6,7 @@ import lombok.Data;
 import com.dev2prod.ticket.caisse.entity.CaisseEntity;
 import com.dev2prod.ticket.departement.entity.DepartementEntity;
 import com.dev2prod.ticket.profil.entity.ProfilEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -53,7 +54,7 @@ public class UserEntity {
 	    /*@ManyToOne(fetch = FetchType.EAGER)
 	    @JoinColumn(name = "departement_id")
 	    private DepartementEntity departement;*/
-	    
+	    @JsonIgnore
 	    @OneToMany(mappedBy = "responsable")
 	    private List<DepartementEntity> departementsResponsables;
 
